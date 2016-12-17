@@ -30,9 +30,9 @@ describe('Graph', () => {
 
     describe('Testing the search algorithm', () => {
         it('Should return 9', () => {
-            assert.equal(graph.dijkstra('A', 'C'), 9);
-            assert.equal(graph.dijkstra('B', 'E'), 6);
-            assert.equal(graph.dijkstra('C', 'C'), 9);
+            assert.equal(graph.findBestPath('A', 'C'), 9);
+            assert.equal(graph.findBestPath('B', 'E'), 6);
+            assert.equal(graph.findBestPath('C', 'C'), 9);
         });
     });
 });

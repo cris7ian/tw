@@ -1,5 +1,6 @@
 import find from 'lodash/find';
 import pull from 'lodash/pull';
+import min from 'lodash/min';
 
 export class Graph {
     constructor(nodes) {
@@ -49,6 +50,12 @@ export class Graph {
                 });
         }
         return dist[end];
+    }
+
+    findBestPath(beginning, end) {
+        return min(this.nodes
+            .filter((node) => node.start === beginning)
+            .map((node) => node.weight + this.dijkstra(node.end, end)));
     }
 
     weightOfPath(route) {
