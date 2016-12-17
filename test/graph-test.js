@@ -27,4 +27,12 @@ describe('Graph', () => {
             assert.equal(graph.countTripsWithLessThanNStops('C', 'C', 3), 2);
         });
     });
+
+    describe('Testing the search algorithm', () => {
+        it('Should return 9', () => {
+            assert.equal(graph.dijkstra('A', 'C'), 9);
+            assert.equal(graph.dijkstra('B', 'E'), 6);
+            assert.equal(graph.dijkstra('C', 'C'), 9);
+        });
+    });
 });

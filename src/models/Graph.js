@@ -1,8 +1,54 @@
 import find from 'lodash/find';
+import pull from 'lodash/pull';
 
 export class Graph {
     constructor(nodes) {
         this.nodes = nodes;
+        this.vertexes = [];
+        nodes.map((node) => {
+            if (this.vertexes.indexOf(node.start) == -1) this.vertexes.push(node.start);
+            if (this.vertexes.indexOf(node.end)  == -1) this.vertexes.push(node.end);
+        });
+    }
+
+    dijkstra(source, end) {
+        const dist = {};
+        const prev = {};
+        let queue = [];
+
+        this.vertexes.map((vertex) => {
+            dist[vertex] = Infinity;
+            prev[vertex] = null;
+            queue.push(vertex);
+        });
+
+        dist[source] = 0;
+
+        while(queue.length > 0) {
+            let tempVal = Infinity;
+            let vertex = null;
+            for (let index = 0; index < queue.length; index++) {
+                if (dist[queue[index]] < tempVal) {
+                    vertex = queue[index];
+                    tempVal = dist[queue[index]];
+                }
+            }
+            if (vertex === end)  {
+                break;
+            }
+            queue = pull(queue, vertex);
+
+            this.nodes
+                .filter((node) => node.start === vertex)
+                .map((node) => {
+                    const alt = dist[vertex] + node.weight;
+                    if (alt < dist[node.end]) {
+                        dist[node.end] = alt;
+                        prev[node.end] = vertex;
+                    }
+                });
+        }
+        return dist[end];
     }
 
     weightOfPath(route) {
@@ -40,6 +86,6 @@ export class Graph {
     }
 
     countTripsWithLessThanNStops(location, goal, stops) {
-        return this.countTrips([], location, goal, stops + 1, (trip, ceiling) => trip.length < ceiling  && trip.length > 1);
+        return this.countTrips([], location, goal, stops + 1, (trip, ceiling) => trip.length < ceiling && trip.length > 1);
     }
 }
