@@ -12,7 +12,7 @@ export class Graph {
         });
     }
 
-    dijkstra(source, end) {
+    dijkstra(source, goal) {
         const dist = {};
         const prev = {};
         let queue = [];
@@ -34,11 +34,10 @@ export class Graph {
                     tempVal = dist[queue[index]];
                 }
             }
-            if (vertex === end)  {
+            if (vertex === goal)  {
                 break;
             }
             queue = pull(queue, vertex);
-
             this.nodes
                 .filter((node) => node.start === vertex)
                 .map((node) => {
@@ -49,13 +48,15 @@ export class Graph {
                     }
                 });
         }
-        return dist[end];
+        return dist[goal];
     }
 
     findBestPath(beginning, end) {
-        return min(this.nodes
+        return min(
+            this.nodes
             .filter((node) => node.start === beginning)
-            .map((node) => node.weight + this.dijkstra(node.end, end)));
+            .map((node) => node.weight + this.dijkstra(node.end, end))
+        );
     }
 
     weightOfPath(route) {
@@ -88,11 +89,48 @@ export class Graph {
         }
     };
 
-    countTripsWithExactStops(location, goal, stops) {
-        return this.countTrips([], location, goal, stops, (trip, ceiling) => trip.length === ceiling);
+    measureTrips(trip, location, goal, distanceAllowed) {
+        const soFar = [...trip, location];
+        const distanceSoFar = this.weightOfPath(soFar.join('-'));
+        if (distanceSoFar < distanceAllowed && location === goal && soFar.length > 1)  {
+            return 1 + [...this.nodes]
+                            .filter((node) => node.start === location)
+                            .reduce((sum, node) => sum + this.measureTrips(soFar, node.end, goal, distanceAllowed), 0);
+        } else if (distanceSoFar >= distanceAllowed) {
+            return 0;
+        } else {
+            return [...this.nodes]
+                        .filter((node) => node.start === location)
+                        .reduce((sum, node) => sum + this.measureTrips(soFar, node.end, goal, distanceAllowed), 0);
+        }
+    };
+
+    countTripsWithExactStops(source, goal, stops) {
+        return this.countTrips(
+            [],
+            source,
+            goal,
+            stops,
+            (trip, ceiling) => trip.length === ceiling
+        );
     }
 
-    countTripsWithLessThanNStops(location, goal, stops) {
-        return this.countTrips([], location, goal, stops + 1, (trip, ceiling) => trip.length < ceiling && trip.length > 1);
+    countTripsWithLessThanNStops(source, goal, stops) {
+        return this.countTrips(
+            [],
+            source,
+            goal,
+            stops + 1,
+            (trip, ceiling) => trip.length < ceiling && trip.length > 1
+        );
+    }
+
+    countTripsWithMaximunDistance(source, goal, distance) {
+        return this.measureTrips(
+            [],
+            source,
+            goal,
+            distance
+        );
     }
 }

@@ -12,6 +12,7 @@ describe('Graph', () => {
             assert.equal(graph.weightOfPath('A-D'), 5);
             assert.equal(graph.weightOfPath('A-D-C'), 13);
             assert.equal(graph.weightOfPath('A-E-B-C-D'), 22);
+            assert.equal(graph.weightOfPath('C-E-B-C-E-B-C-E-B-C'), 27);
             assert.equal(graph.weightOfPath('A-E-D'), 'NO SUCH ROUTE');
         });
     });
@@ -29,10 +30,16 @@ describe('Graph', () => {
     });
 
     describe('Testing the search algorithm', () => {
-        it('Should return 9', () => {
+        it('Should return the optimal distance', () => {
             assert.equal(graph.findBestPath('A', 'C'), 9);
             assert.equal(graph.findBestPath('B', 'E'), 6);
             assert.equal(graph.findBestPath('C', 'C'), 9);
+        });
+    });
+
+    describe('Testing the distance algorithm', () => {
+        it('Should the number of different routes from X to Y with a distance of less than N', () => {
+            assert.equal(graph.countTripsWithMaximunDistance('C', 'C', 30), 7);
         });
     });
 });
