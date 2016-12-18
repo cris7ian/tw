@@ -86,10 +86,20 @@ I wanted to use JavaScript to provide a simple, straightforward and easy-to-read
 the shortcuts of the language to my advantage.
 
 I don't think that JavaScript is the best language in the World (Hell no), but using the right tool for the job is
-something I enjoy and ES2015 did give me the tools to showcase a balance between OOP and functional programming, which I think is the best approach to solve and understand this kind of problems.
+something I enjoy and ES2015 did give me the tools to showcase a balance between OOP and functional programming, which
+I think is the best approach to solve and understand this kind of problems.
+
+I also tried to write the code in the same way the community writes code. The JS code one finds in GH is lean and
+easy-to-use. If this code were to be written in Java, the approach would've been totally different, because of the OOP
+nature of the language. Same case if I were to do this over again in Haskell, probably it would've been even leaner.
 
 Also, the IO becomes trivial in Node.
 
 # TDD
 Writing the tests first is the cornerstone of pretty much every backend implementation I do. So I just wrote what I
 wanted the code to be and then began coding. I don't honestly start with 100 cases, just the basic ones that come to mind and from there I try to add some clever ones if I have the time.
+
+# The Code
+- `src` has all the sourcefiles.
+- `test` has all the tests.
+- `src/index.js` is the entry point of the app.

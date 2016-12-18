@@ -2,7 +2,7 @@ import fs from 'fs';
 import { parser } from './helpers/parser';
 import { Graph } from './models/Graph';
 
-const path = process.argv[process.argv.length - 1];
+const path = process.argv[process.argv.length - 1]; // we simply read the last arg as the filepath.
 
 if (!path) {
     console.log('You need to pass the file path through the command line. (example: node dist/index.js input.txt)');
