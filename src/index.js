@@ -2,10 +2,10 @@ import fs from 'fs';
 import { parser } from './helpers/parser';
 import { Graph } from './models/Graph';
 
-const path = process.argv[4];
+const path = process.argv[process.argv.length - 1];
 
 if (!path) {
-    console.log('You need to pass the file path through the command line. (example: npm start input.txt)');
+    console.log('You need to pass the file path through the command line. (example: node dist/index.js input.txt)');
     process.exit(0);
 }
 
