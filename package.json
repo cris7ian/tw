@@ -1,16 +1,16 @@
 {
-  "name": "train_planner",
+  "name": "snowpiercer",
   "version": "1.0.0",
-  "description": "Train planning.",
+  "description": "Train bending, I mean... planning.",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/index.js --exec babel-node --presets es2015,stage-2",
+    "start": "babel-node src/index.js --presets es2015,stage-2",
     "build": "babel lib -d dist",
     "lint": "eslint -c .eslintrc.json src",
     "serve": "node dist/index.js",
     "test": "mocha --require babel-polyfill --compilers js:babel-register"
   },
-  "author": "Cristian Caroli",
+  "author": "Jon Snow",
   "license": "private",
   "dependencies": {
     "lodash": "^4.17.2"

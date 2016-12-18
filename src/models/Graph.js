@@ -87,7 +87,7 @@ export class Graph {
                 .filter((node) => node.start === location)
                 .reduce((sum, node) => sum + this.countTrips(soFar, node.end, goal, ceiling, comparator), 0);
         }
-    };
+    }
 
     measureTrips(trip, location, goal, distanceAllowed) {
         const soFar = [...trip, location];
@@ -103,7 +103,7 @@ export class Graph {
                         .filter((node) => node.start === location)
                         .reduce((sum, node) => sum + this.measureTrips(soFar, node.end, goal, distanceAllowed), 0);
         }
-    };
+    }
 
     countTripsWithExactStops(source, goal, stops) {
         return this.countTrips(
