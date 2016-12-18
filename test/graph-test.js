@@ -8,12 +8,12 @@ describe('Graph', () => {
 
     describe('Calculating the Weight of a given route', () => {
         it('should be the sum of the weights of all the edges in the route or NO SUCH ROUTE if there is none', () => {
-            assert.equal(graph.weightOfPath('A-B-C'), 9);
-            assert.equal(graph.weightOfPath('A-D'), 5);
-            assert.equal(graph.weightOfPath('A-D-C'), 13);
-            assert.equal(graph.weightOfPath('A-E-B-C-D'), 22);
-            assert.equal(graph.weightOfPath('C-E-B-C-E-B-C-E-B-C'), 27);
-            assert.equal(graph.weightOfPath('A-E-D'), 'NO SUCH ROUTE');
+            assert.equal(graph.weightOfPathFromString('A-B-C'), 9);
+            assert.equal(graph.weightOfPathFromString('A-D'), 5);
+            assert.equal(graph.weightOfPathFromString('A-D-C'), 13);
+            assert.equal(graph.weightOfPathFromString('A-E-B-C-D'), 22);
+            assert.equal(graph.weightOfPathFromString('C-E-B-C-E-B-C-E-B-C'), 27);
+            assert.equal(graph.weightOfPathFromString('A-E-D'), 'NO SUCH ROUTE');
         });
     });
 

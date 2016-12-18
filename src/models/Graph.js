@@ -59,8 +59,11 @@ export class Graph {
         );
     }
 
-    weightOfPath(route) {
-        const map = route.split('-');
+    weightOfPathFromString(str) {
+        return this.weightOfPath(str.split('-'));
+    }
+
+    weightOfPath(map) {
         let distance = 0;
         for (let index = 0; index < map.length - 1; index++) {
             const start = map[index];
@@ -91,7 +94,7 @@ export class Graph {
 
     measureTrips(trip, location, goal, distanceAllowed) {
         const soFar = [...trip, location];
-        const distanceSoFar = this.weightOfPath(soFar.join('-'));
+        const distanceSoFar = this.weightOfPath(soFar);
         if (distanceSoFar < distanceAllowed && location === goal && soFar.length > 1)  {
             return 1 + [...this.nodes]
                             .filter((node) => node.start === location)
